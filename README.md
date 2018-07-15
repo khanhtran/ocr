@@ -48,12 +48,7 @@ We are going to design and implement a online clinic reservation project. This i
 
 ### Patient register an account
 ### Patient make an appointment
-
-
-
-
-
-Admin create new doctor
+### Admin create new doctor
 
 
 
