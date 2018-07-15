@@ -1,6 +1,10 @@
 package com.earthteam.ocr.controller;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,22 +19,14 @@ public class HomeController {
  	private EmployeeService customerService;
 
 	@RequestMapping({"/","/welcome"})
-	public String welcome(Model model) {
-		
-		
-		model.addAttribute("greeting", "Welcome to the Lone Ranger Company, Kimosabe!!");
-		model.addAttribute("tagline", "The one and only place to work, so you can live and play!!");
-
-/*
- 		Customer c = new Customer();
-
-		c.setLastName("Dreamer");
-		c.setFirstName("Freddy");
- 		c.setAge(15);
-*/		
- 		
-//		customerService.save(c);
-		
+	public String welcome(Model model, Authentication authentication) {
+		model.addAttribute("greeting", "Welcome to ABC Medical Clinic");
+		if (authentication != null ) {
+			Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
+	        if (roles.contains("ROLE_ADMIN")){
+	            return "redirect:/admin";
+	        }
+		}
 		return "welcome";
 	}
 	
