@@ -9,15 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.earthteam.ocr.service.EmployeeService;
   
 @Controller
 public class HomeController {
-
-	
-  	@Autowired
- 	private EmployeeService customerService;
-
 	@RequestMapping({"/","/welcome"})
 	public String welcome(Model model, Authentication authentication) {
 		model.addAttribute("greeting", "Welcome to ABC Medical Clinic");
