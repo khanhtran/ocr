@@ -1,34 +1,51 @@
 package com.earthteam.ocr.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.constraints.Pattern;
+
+
+@Entity
 public class Phone {
 
-	private int area;
+	@Id
+	@Column(name = "PHONE_ID")
+	private int id;
+	
+	@Column(name = "AREA")
+	@Pattern(regexp = "\\d{3}", message = "{error.area}")
+	private String area;
+	
+	@Column(name = "PREFIX")
+	@Pattern(regexp = "\\d{3}", message = "{error.prefix")
+	private String prefix;
 
-	private int prefix;
+	@Column(name = "NUMBER")
+	@Pattern(regexp = "\\d{4}", message = "{error.number}")
+	private String number;
 
-	private int number;
-
-	public int getArea() {
+	public String getArea() {
 		return area;
 	}
 
-	public void setArea(int area) {
+	public void setArea(String area) {
 		this.area = area;
 	}
 
-	public int getPrefix() {
+	public String getPrefix() {
 		return prefix;
 	}
 
-	public void setPrefix(int prefix) {
+	public void setPrefix(String prefix) {
 		this.prefix = prefix;
 	}
 
-	public int getNumber() {
+	public String getNumber() {
 		return number;
 	}
 
-	public void setNumber(int number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 }

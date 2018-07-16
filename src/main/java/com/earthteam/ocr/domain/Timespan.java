@@ -2,6 +2,7 @@ package com.earthteam.ocr.domain;
 
 import java.time.LocalTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,8 +11,13 @@ import javax.persistence.Id;
 public class Timespan {
 	@Id
 	@GeneratedValue
+	@Column(name = "TIMESPAN_ID")
 	private int id;
+	
+	@Column(name = "START")
 	private String start;
+	
+	@Column(name = "END")
 	private String end;
 
 	public int getId() {

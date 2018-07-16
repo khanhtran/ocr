@@ -1,11 +1,30 @@
 package com.earthteam.ocr.domain;
 
-public class Address {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+@Entity
+public class Address {
+	@Id
+	@GeneratedValue
+	@Column(name = "ADDRESS_ID")
+	private int id;
+	
+	@NotNull
+	@Column(name = "STREET")
 	private String street;
 
+	@NotNull
+	@Column(name = "CITY")
 	private String city;
 
+	@NotNull
+	@Column(name = "STATE")
+	@Size(min = 2, max = 2, message = "{error.state}")
 	private String state;
 
 	public String getStreet() {
