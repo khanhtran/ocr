@@ -36,7 +36,7 @@
 				</security:authorize>
 				<a href="<spring:url value='/admin/doctors/add' />"
 					class="btn btn-default"> <span
-					class="glyphicon-hand-left glyphicon"></span> Add new Doctor
+					class="glyphicon-hand-left glyphicon"></span><spring:message code="addNewDoctor"/>
 				</a>
 			</div>
 		</div>

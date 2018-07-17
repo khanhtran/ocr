@@ -2,14 +2,15 @@ package com.earthteam.ocr.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Pattern;
-
 
 @Entity
 public class Phone {
 
 	@Id
+	@GeneratedValue
 	@Column(name = "PHONE_ID")
 	private int id;
 	
@@ -18,7 +19,7 @@ public class Phone {
 	private String area;
 	
 	@Column(name = "PREFIX")
-	@Pattern(regexp = "\\d{3}", message = "{error.prefix")
+	@Pattern(regexp = "\\d{3}", message = "{error.prefix}")
 	private String prefix;
 
 	@Column(name = "NUMBER")
@@ -47,5 +48,10 @@ public class Phone {
 
 	public void setNumber(String number) {
 		this.number = number;
+	}
+	
+	@Override
+	public String toString() {
+		return area + prefix + number;
 	}
 }

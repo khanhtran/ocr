@@ -51,4 +51,11 @@ public class Timespan {
 	public String getValue() {
 		return start + " - " + end;
 	}
+
+	@Override
+	public String toString() {
+		return getValue();
+	}
+	
+	
 }

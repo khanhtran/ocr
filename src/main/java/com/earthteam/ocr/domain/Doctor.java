@@ -2,6 +2,7 @@ package com.earthteam.ocr.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,10 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.validation.Valid;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,25 +26,26 @@ public class Doctor {
 	@Column(name = "DOCTOR_ID")
 	private Long id;
 
-	@NotEmpty
+	@NotEmpty(message = "{String.empty}")
 	@Column(name = "FIRST_NAME")
 	private String firstName;
 	
-	@NotEmpty
+	@NotEmpty(message = "{String.empty}")
 	@Column(name = "LAST_NAME")
 	private String lastName;
 	
-	@NotEmpty
+	@NotEmpty(message = "{String.empty}")
 	@Column(name = "PORTFOLIO")
+	@Size(max = 4096, message = "{String.maxLength}")
 	private String portfolio;
 
 	@Valid
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ADDRESS_ID")
 	private Address address;
 
 	@Valid
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "PHONE_ID")
 	private Phone phone;
 
@@ -53,7 +55,8 @@ public class Doctor {
 	@ManyToOne
 	@JoinColumn(name = "CATEGORY_ID")
 	private Category doctorCategory;
-
+	
+	@NotEmpty(message = "{timespan.empty}")
 	@ManyToMany
 	private List<Timespan> availableTimespans;
 	
@@ -129,5 +132,11 @@ public class Doctor {
 	public void setAvailableTimespans(List<Timespan> availableTimespans) {
 		this.availableTimespans = availableTimespans;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Doctor [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", portfolio=" + portfolio
+				+ ", address=" + address + ", phone=" + phone + ", picture=" + picture + ", doctorCategory="
+				+ doctorCategory + ", availableTimespans=" + availableTimespans + "]";
+	}
 }

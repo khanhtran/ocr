@@ -1,4 +1,4 @@
-package com.earthteam.ocr.service.impl;
+package com.earthteam.ocr.serviceimpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +20,11 @@ public class TimeSpanServiceImpl implements TimespanService {
 		List<Timespan> list = new ArrayList<>();
 		tinmespanRepository.findAll().forEach((Timespan t) -> list.add(t));
 		return list;
+	}
+
+	@Override
+	public Timespan getById(int id) {
+		return tinmespanRepository.findOne(id);
 	}
 
 }
