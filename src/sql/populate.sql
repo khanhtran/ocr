@@ -12,4 +12,5 @@ INSERT INTO `location` VALUES (NULL,'1 Yellow Brook Road','Emerald City','OZ', '
 INSERT INTO `employee` VALUES (NULL,12, 8754,'Curious','George','Boy Monkey',1,"guest");
 INSERT INTO `employee` VALUES (NULL,123, 8733,'Allen','Rench','Torque Master',2,"admin");
 
-					
+INSERT INTO `timespan` VALUES (1,'10:45','10:00'),(2,'11:45','11:00'),(3,'14:15','13:30'),(4,'15:15','14:30'),(5,'16:15','15:30'),(6,'17:15','16:30');
+INSERT INTO `category` VALUES (1,'Allergist',NULL),(2,'Cardiologist',NULL),(3,'Chiropractor',NULL),(4,'Dentist',NULL),(5,'Dermatologist',NULL),(6,'Gastroenterologist',NULL),(7,'Opthalmologist',NULL),(8,'Optometrist',NULL),(9,'Orthopedic Surgeon',NULL),(10,'Pediatrician',NULL),(11,'Primary Care Doctor',NULL),(12,'Psychiatrist',NULL),(13,'Urologist',NULL);					

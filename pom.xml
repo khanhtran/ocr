@@ -92,7 +92,6 @@
   		<artifactId>hibernate-validator</artifactId>
   		<version>5.0.1.Final</version>
   	</dependency>
-	
 	<dependency>
   		<groupId>cglib</groupId>
   		<artifactId>cglib-nodep</artifactId>

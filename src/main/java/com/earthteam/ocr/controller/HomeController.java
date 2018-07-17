@@ -9,18 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.earthteam.ocr.service.EmployeeService;
   
 @Controller
 public class HomeController {
-
-	
-  	@Autowired
- 	private EmployeeService customerService;
-
-	@RequestMapping({"/","/welcome"})
+	@RequestMapping({"", "/","/welcome"})
 	public String welcome(Model model, Authentication authentication) {
-		model.addAttribute("greeting", "Welcome to ABC Medical Clinic");
+//		model.addAttribute("greeting", "Welcome to ABC Medical Clinic");
 		if (authentication != null ) {
 			Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
 	        if (roles.contains("ROLE_ADMIN")){
@@ -33,5 +27,10 @@ public class HomeController {
 	@RequestMapping("/welcome/greeting")
 	public String greeting() {
 		return "welcome";
+	}
+	
+	@RequestMapping("/test")
+	public String test() throws Exception {
+		throw new Exception("test");
 	}
 }

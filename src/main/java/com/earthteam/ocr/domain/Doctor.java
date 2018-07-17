@@ -1,25 +1,66 @@
 package com.earthteam.ocr.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
+@Entity
 public class Doctor {
 
+	@Id
+	@GeneratedValue
+	@Column(name = "DOCTOR_ID")
 	private Long id;
 
+	@NotEmpty(message = "{String.empty}")
+	@Column(name = "FIRST_NAME")
 	private String firstName;
-
+	
+	@NotEmpty(message = "{String.empty}")
+	@Column(name = "LAST_NAME")
 	private String lastName;
-
+	
+	@NotEmpty(message = "{String.empty}")
+	@Column(name = "PORTFOLIO")
+	@Size(max = 4096, message = "{String.maxLength}")
 	private String portfolio;
 
+	@Valid
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ADDRESS_ID")
 	private Address address;
 
+	@Valid
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "PHONE_ID")
 	private Phone phone;
 
+	@Transient
 	private MultipartFile picture;
 
-	private DoctorCategory doctorCategory;
-
+	@ManyToOne
+	@JoinColumn(name = "CATEGORY_ID")
+	private Category doctorCategory;
+	
+	@NotEmpty(message = "{timespan.empty}")
+	@ManyToMany
+	private List<Timespan> availableTimespans;
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -76,12 +117,26 @@ public class Doctor {
 		this.picture = picture;
 	}
 
-	public DoctorCategory getDoctorCategory() {
+	public Category getDoctorCategory() {
 		return doctorCategory;
 	}
 
-	public void setDoctorCategory(DoctorCategory doctorCategory) {
+	public void setDoctorCategory(Category doctorCategory) {
 		this.doctorCategory = doctorCategory;
 	}
 
+	public List<Timespan> getAvailableTimespans() {
+		return availableTimespans;
+	}
+
+	public void setAvailableTimespans(List<Timespan> availableTimespans) {
+		this.availableTimespans = availableTimespans;
+	}
+
+	@Override
+	public String toString() {
+		return "Doctor [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", portfolio=" + portfolio
+				+ ", address=" + address + ", phone=" + phone + ", picture=" + picture + ", doctorCategory="
+				+ doctorCategory + ", availableTimespans=" + availableTimespans + "]";
+	}
 }
