@@ -3,46 +3,73 @@ package com.earthteam.ocr.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
-@Entity(name="location")
+import org.hibernate.validator.constraints.NotEmpty;
+
+@Entity
 public class Address {
-
-    @Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
- 	private long id;
-
- 	private String street;
-	private String city;
+	@Id
+	@GeneratedValue
+	@Column(name = "ADDRESS_ID")
+	private int id;
 	
- 	private String state;
+	@NotEmpty(message = "{String.empty}")
+	@Column(name = "STREET")
+	private String street;
 
- 	@Column(name="zip")
-  	private String zipCode;
+	@NotEmpty(message = "{String.empty}")
+	@Column(name = "CITY")
+	private String city;
+
+	@Column(name = "STATE")
+	@Size(min = 2, max = 2, message = "{error.state}")
+	private String state;
+
+	@Column(name = "ZIP_CODE")
+	@Pattern(regexp = "\\d{5}", message = "{error.zip}")
+	private String zip;
 	
 	public String getStreet() {
 		return street;
 	}
+
 	public void setStreet(String street) {
 		this.street = street;
 	}
+
 	public String getCity() {
 		return city;
 	}
+
 	public void setCity(String city) {
 		this.city = city;
 	}
+
 	public String getState() {
 		return state;
 	}
+
 	public void setState(String state) {
 		this.state = state;
 	}
-	public String getZipCode() {
-		return zipCode;
+
+	public int getId() {
+		return id;
 	}
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getZip() {
+		return zip;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
 	}
 }
