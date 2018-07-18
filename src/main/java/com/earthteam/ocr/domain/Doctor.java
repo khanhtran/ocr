@@ -60,7 +60,12 @@ public class Doctor {
 	@ManyToMany
 	private List<Timespan> availableTimespans;
 	
+	private String fullName;
 	
+	public String getFullName() {
+		return firstName + " " + lastName;
+	}
+
 	public Long getId() {
 		return id;
 	}

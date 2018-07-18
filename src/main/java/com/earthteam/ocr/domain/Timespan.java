@@ -57,5 +57,4 @@ public class Timespan {
 		return getValue();
 	}
 	
-	
 }
