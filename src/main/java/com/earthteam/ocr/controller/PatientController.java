@@ -58,7 +58,7 @@ public class PatientController {
 		patient.getCredentials().setPassword(encodedPassword);
 		patient.getCredentials().setEnabled(true);
 		authority.setUsername(patient.getCredentials().getUsername());
-		authority.setAuthority("ROLE_ADMIN");
+		authority.setAuthority("ROLE_USER");
 		List<Authority> list = new ArrayList<>();
 		list.add(authority);
 		patient.getCredentials().setAuthority(list);

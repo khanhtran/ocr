@@ -25,15 +25,17 @@
 			<spring:message code="lastName" />:
 			${patient.lastName}<br />
 			<spring:message code="form.phone" />:
-			${patient.phone}
+			${patient.phone}<br/>
 			<spring:message code="form.emailAddress" />:
 			${patient.emailAddress}
 			</p>
 			<form action='<spring:url value="/patient/register"/>' method="get">
-				<input id="submit" class="btn btn-default" type="submit"
-					value='<spring:message code="addMorePatient"/>' />
+				<%-- <input id="submit" class="btn btn-default" type="submit"
+					value='<spring:message code="addMorePatient"/>' /> --%>
 				<a href="<spring:url value='/' />"
 						class="btn btn-default"><spring:message code="home"/></a>
+				<a href="<spring:url value='/login' />"
+						class="btn btn-default"><spring:message code="login"/></a>		
 			</form>
 		</div>
 	</section>
