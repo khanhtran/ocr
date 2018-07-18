@@ -59,4 +59,16 @@ public class AppointmentController {
 
 		return "appointment/make-appointment";
 	}
+	
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public String checkAppointment(@ModelAttribute("newAppointment") AppointmentViewModel appointment, Model model) {
+		
+		return "appointment/check-spans";
+	}
+	
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public String saveAppointment(@ModelAttribute("newAppointment") AppointmentViewModel appointment, Model model) {
+		
+		return "appointment/save-appointment-result";
+	}
 }
