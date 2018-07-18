@@ -36,39 +36,46 @@ public class PatientController {
 	PatientService patientService;
 	
 	@Autowired
- 	BCryptPasswordEncoder passwordEncoder;
-	
+	BCryptPasswordEncoder passwordEncoder;
+
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String registerPatient(@ModelAttribute("patient") Patient patient, Model model) {
-		
+
 		return "patient/patient-registration";
-		
+
 	}
-	
+
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String saveDoctor(@ModelAttribute("patient") @Valid Patient patient, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws IOException {
-		
+	public String saveDoctor(@ModelAttribute("patient") @Valid Patient patient, BindingResult bindingResult,
+			RedirectAttributes redirectAttributes) throws IOException {
+
 		if (bindingResult.hasErrors()) {
 			System.out.println(bindingResult.getAllErrors());
 			return "patient/patient-registration";
 		}
+
+		Authority authority = new Authority();
 		
-		Authority authority = new  Authority();
 		String encodedPassword = passwordEncoder.encode(patient.getCredentials().getPassword());
 		patient.getCredentials().setPassword(encodedPassword);
+		
 		patient.getCredentials().setEnabled(true);
+		
 		authority.setUsername(patient.getCredentials().getUsername());
 		authority.setAuthority("ROLE_USER");
+
 		List<Authority> list = new ArrayList<>();
 		list.add(authority);
 		patient.getCredentials().setAuthority(list);
-		long patientId = patientService.save(patient);
-		System.out.println("Saved Patient with id: "+patientId +" and userName is: "+ patient.getCredentials().getUsername()+"and password is:"+patient.getCredentials().getPassword());
 		
+		long patientId = patientService.save(patient);
+		System.out.println("Saved Patient with id: " + patientId + " and userName is: "
+				+ patient.getCredentials().getUsername() + "and password is:" + patient.getCredentials().getPassword());
+
 		redirectAttributes.addFlashAttribute("patient", patient);
 		return "redirect:details";
 	}
-	
+
 	@RequestMapping(value = "/details")
 	public String showPatientDetails() {
 		return "patient/patient_details";
