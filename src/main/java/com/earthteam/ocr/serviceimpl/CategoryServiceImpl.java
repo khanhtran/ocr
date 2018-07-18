@@ -31,4 +31,9 @@ public class CategoryServiceImpl implements CategoryService {
 		return categoryRepository.findOne(id);
 	}
 
+	@Override
+	public int save(Category category) {
+		return categoryRepository.save(category).getId();
+	}
+
 }

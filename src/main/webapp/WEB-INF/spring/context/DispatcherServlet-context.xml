@@ -21,11 +21,14 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
-	
 	<bean id= "messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
    		<property name="basename" value="messages"/> 
 	</bean>
 	
+	<bean id="messageAccessor" class="org.springframework.context.support.MessageSourceAccessor">
+    	<constructor-arg  ref="messageSource"/>
+	</bean>
+	 
 	<bean id="validator"
 		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
 		<property name="validationMessageSource" ref="messageSource" />

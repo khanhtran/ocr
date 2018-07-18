@@ -22,25 +22,31 @@
 			</div>
 
 			<div class="container">
-				<security:authorize access="isAuthenticated()">
-					<spring:url value="/dologout" var="logout_url" />
-					<form:form action="${logout_url}" class="form-horizontal"
-						method="POST">
-						<div class="form-group">
-							<div class="col-lg-offset-2 col-lg-10">
-								<input type="submit" id="btnAdd"
-									class="btn btn-danger btn-mini  pull-right" value="Logout" />
-							</div>
-						</div>
-					</form:form>
-				</security:authorize>
+				
+				<a href="<spring:url value='/admin/doctors/list' />"
+					class="btn btn-default"> <span
+					class="glyphicon-hand-right glyphicon"></span><spring:message code="doctorList"/>
+				</a>
+				
 				<a href="<spring:url value='/admin/doctors/add' />"
 					class="btn btn-default"> <span
-					class="glyphicon-hand-left glyphicon"></span><spring:message code="addNewDoctor"/>
+					class="glyphicon-hand-right glyphicon"></span><spring:message code="addNewDoctor"/>
 				</a>
+				
+				<security:authorize access="isAuthenticated()">
+					<spring:url value="/dologout" var="logout_url" />
+					<a href="javascript: $('#logoutForm').submit();"
+					class="btn btn-default"> <span
+					class="glyphicon-hand-right glyphicon"></span>Logout
+					</a>
+					<form:form action="${logout_url}" class="form-horizontal"
+						method="POST" id="logoutForm">
+					</form:form>
+				</security:authorize>
+				
 			</div>
 		</div>
 	</section>
-
+	<script type="text/javascript"	src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 </body>
 </html>

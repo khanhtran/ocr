@@ -52,6 +52,6 @@ public class Phone {
 	
 	@Override
 	public String toString() {
-		return area + prefix + number;
+		return area + "-" + prefix + "-" + number;
 	}
 }

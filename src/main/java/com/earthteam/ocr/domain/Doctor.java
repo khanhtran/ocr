@@ -133,6 +133,10 @@ public class Doctor {
 		this.availableTimespans = availableTimespans;
 	}
 
+	public String getFullName() {
+		return firstName + " " + lastName;
+	}
+	
 	@Override
 	public String toString() {
 		return "Doctor [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", portfolio=" + portfolio

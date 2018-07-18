@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity(name = "CATEGORY")
 public class Category {
 
@@ -13,6 +15,7 @@ public class Category {
 	@Column(name = "CATEGORY_ID")
 	private int id;
 	
+	@NotEmpty(message = "{String.empty}")
 	@Column(name = "CATEGORY_NAME")
 	private String categoryName;
 

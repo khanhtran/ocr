@@ -29,12 +29,17 @@
 			<spring:message code="form.phone" />:
 			${doctor.phone}
 			</p>
-			<form action='<spring:url value="/admin/doctors/add"/>' method="get">
-				<input id="submit" class="btn btn-default" type="submit"
-					value='<spring:message code="addMoreDoctor"/>' />
-				<a href="<spring:url value='/' />"
-						class="btn btn-default"><spring:message code="home"/></a>
-			</form>
+			
+			<a href="<spring:url value='/admin/doctors/list' />"
+				class="btn btn-default"><spring:message code="doctorList"/>
+			</a>
+			<a href="<spring:url value='/admin/doctors/add'/>"
+				class="btn btn-default"></span><spring:message code="addMoreDoctor"/>
+			</a>
+			<a href="<spring:url value='/' />"
+						class="btn btn-default"><spring:message code="home"/>
+			</a>
+			
 		</div>
 	</section>
 </body>

@@ -57,6 +57,13 @@ public class AdminDoctorController {
 	@Autowired
 	private ServletContext servletContext;
 	
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String listDoctors(Model model) {
+		List<Doctor> doctorList = doctorService.findAll();
+		model.addAttribute("doctors", doctorList);
+		return "admin/doctor_list";
+	}
+	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addDoctor(@ModelAttribute("doctor") Doctor doctor, Model model) {
 //		doctor.setAvailableTimespans((List<Timespan>)model.asMap().get("timespans"));
@@ -67,16 +74,13 @@ public class AdminDoctorController {
 	public String saveDoctor(@ModelAttribute("doctor") @Valid Doctor doctor, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws IOException {
 		
 		if (bindingResult.hasErrors()) {
-			System.out.println(bindingResult.getAllErrors());
 			return "admin/add_doctor";
 		}
-		MultipartFile doctorPicture = doctor.getPicture();
 		long doctorId = doctorService.save(doctor);
-		System.out.println("Saved " + doctor);
+		MultipartFile doctorPicture = doctor.getPicture();
 		if (doctorPicture != null && !doctorPicture.isEmpty()) {
 			savePicture(doctorId, doctorPicture);
 		}
-		
 //		Process file upload
 		redirectAttributes.addFlashAttribute("doctor", doctor);
 		return "redirect:details";
@@ -86,7 +90,9 @@ public class AdminDoctorController {
 		String rootDirectory = servletContext.getRealPath("/");
 		File outputfile = new File(rootDirectory + "\\data\\doctor_" + id + ".png");
 		BufferedImage bufferedImage = ImageIO.read(doctorPicture.getInputStream());
-		ImageIO.write(bufferedImage, "PNG", outputfile);
+		if (bufferedImage != null) {
+			ImageIO.write(bufferedImage, "PNG", outputfile);
+		}
 	}
 	
 	@RequestMapping(value = "/details")
