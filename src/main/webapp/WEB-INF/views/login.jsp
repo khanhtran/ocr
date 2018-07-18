@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"  %>
@@ -7,13 +8,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet"	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-<title>Products</title>
+<title></title>
 </head>
 <body>
 	<section>
 		<div class="jumbotron">
 			<div class="container">
-				<h1>Welcome to ABC Medical Clinic</h1>
+				<h1><spring:message code="welcome"/></h1>
 			</div>
 		</div>
 	</section>
@@ -22,7 +23,7 @@
 		<div class="col-md-4 col-md-offset-4">
     		<div class="panel panel-default">
 			  	<div class="panel-heading">
-			    	<h3 class="panel-title">Please sign in</h3>
+			    	<h3 class="panel-title"><spring:message code="pleaseSignin"/></h3>
 			 	</div>
 			  	<div class="panel-body">
 			  	<c:if test="${not empty error}">
@@ -33,10 +34,10 @@
 			    	<form action="<spring:url value="/postlogin"></spring:url>" method="post">
                     <fieldset>
 			    	  	<div class="form-group">
-			    		    <input class="form:input-large" placeholder="User Name" name='username' type="text">
+			    		    <input class="form:input-large" placeholder="<spring:message code='username'/>" name='username' type="text">
 			    		</div>
 			    		<div class="form-group">
-			    			<input class=" form:input-large" placeholder="Password" name='password'  type="password" value="">
+			    			<input class=" form:input-large" placeholder="<spring:message code='password'/>" name='password'  type="password" value="">
 			    		</div>
 			    		<input class="btn btn-lg btn-success btn-mini" type="submit" value="Login">
 			    	</fieldset>

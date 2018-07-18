@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -88,7 +89,7 @@
 							<div id="success" class="text-info"><spring:message code='info.categorySaved'/></div>
            				</div>
            			</div>
-					<p class="lead">Address</p>
+					<p class="lead"><spring:message code='address'/></p>
 					<div class="form-group">
 	                    <label for="street" class="col-sm-4 control-label"><spring:message code="form.street"/></label>
 	                    <div class="col-sm-8">

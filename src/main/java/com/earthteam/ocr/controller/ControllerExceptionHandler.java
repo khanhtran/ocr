@@ -24,7 +24,7 @@ import com.earthteam.ocr.domain.dto.DomainErrors;
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
-	public static final String DEFAULT_ERROR_VIEW = "error";
+	public static final String DEFAULT_ERROR_VIEW = "error/error";
 
 	@Autowired
 	MessageSourceAccessor messageAccessor;
@@ -32,7 +32,7 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(Exception.class)
 	public String generalException(Exception ex) {
 		ex.printStackTrace();
-		return "error";
+		return DEFAULT_ERROR_VIEW;
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)

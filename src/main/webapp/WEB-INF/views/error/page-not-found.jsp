@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isErrorPage="true" %>
  <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -9,7 +10,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>404 error</title>
+    <title><spring:message code='404error'/></title>
   </head>
   <body>
 
@@ -19,7 +20,7 @@
 
 <H2>${requestScope['javax.servlet.error.message']}</H2>
 
- <p><button type=button onclick=window.location.href="<spring:url value="/welcome" />">Home</button></p>
+ <p><button type=button onclick=window.location.href="<spring:url value="/welcome" />"><spring:message code='home'/></button></p>
 
 </center> 
   </body>
