@@ -20,7 +20,7 @@
 		</div>
 	</section>
 	<section class="container">
-		<form:form modelAttribute="appointment" class="form-horizontal"
+		<form:form modelAttribute="newAppointment" class="form-horizontal"
 			action='add?${_csrf.parameterName}=${_csrf.token}' method="POST"
 			enctype="multipart/form-data">
 
@@ -35,7 +35,7 @@
 								path="category" items="${categories}" itemValue="id"
 								itemLabel="categoryName" />
 						</div>
-						<form:errors path="doctorCategory" cssClass="text-danger" />
+						<form:errors path="category" cssClass="text-danger" />
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-4" for="doctor"><spring:message

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.earthteam.ocr.domain.Appointment;
+import com.earthteam.ocr.viewmodels.AppointmentViewModel;
 import com.earthteam.ocr.domain.Category;
 import com.earthteam.ocr.domain.Doctor;
 import com.earthteam.ocr.domain.Timespan;
@@ -52,12 +52,10 @@ public class AppointmentController {
 	@ModelAttribute("timespans")
 	public List<Timespan> getTimespans() {
 		return timespanService.findAll();
-	}
-	
-	
+	}	
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String addAppointment(@ModelAttribute("appointment") Appointment appointment, Model model) {
+	public String addAppointment(@ModelAttribute("newAppointment") AppointmentViewModel appointment, Model model) {
 
 		return "appointment/make-appointment";
 	}
