@@ -17,6 +17,7 @@
 		<div class="jumbotron">
 			<div class="container">
 				<img src="<spring:url value='/resource/images/clinic.png' />" />
+				<h4 style="padding: 6px 12px;" class="pull-right"><a href="?language=en_US">English</a>|<a href="?language=es_ES">Spanish</a></h4>
 				<h1>
 					<spring:message code="admin.welcome" />
 				</h1>

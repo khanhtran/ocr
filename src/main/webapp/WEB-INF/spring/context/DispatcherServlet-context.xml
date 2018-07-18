@@ -48,12 +48,14 @@
  	<mvc:resources  location="/data/"  mapping="/data/**"/>
  
  	<mvc:interceptors>
-		<mvc:interceptor>
-        	<mvc:mapping path="/employees/list"/>
-        	<bean class="com.earthteam.ocr.interceptor.NoticeInterceptor" />
-    	</mvc:interceptor>	 			
+    	<bean
+			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName" value="language" />
+		</bean>	 			
 	</mvc:interceptors>
  
- 	
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"> 
+		<property name="defaultLocale" value="en_US"/> 
+	</bean> 	
  
  </beans>

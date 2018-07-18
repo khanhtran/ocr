@@ -15,6 +15,7 @@
 		<div class="jumbotron">
 			<div class="container">
 				<h1><spring:message code="welcome"/></h1>
+				<h4 style="padding: 6px 12px;" class="pull-right"><a href="?language=en_US">English</a>|<a href="?language=es_ES">Spanish</a></h4>
 			</div>
 		</div>
 	</section>
@@ -39,7 +40,7 @@
 			    		<div class="form-group">
 			    			<input class=" form:input-large" placeholder="<spring:message code='password'/>" name='password'  type="password" value="">
 			    		</div>
-			    		<input class="btn btn-lg btn-success btn-mini" type="submit" value="Login">
+			    		<input class="btn btn-lg btn-success btn-mini" type="submit" value="<spring:message code='login'/>">
 			    	</fieldset>
 			  			<security:csrfInput />
 			      	</form>

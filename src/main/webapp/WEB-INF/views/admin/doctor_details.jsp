@@ -13,6 +13,7 @@
 		<div class="jumbotron">
 			<div class="container">
 				<h1><spring:message code="doctordetails"/></h1>
+				<h4 style="padding: 6px 12px;" class="pull-right"><a href="?language=en_US">English</a>|<a href="?language=es_ES">Spanish</a></h4>
 			</div>
 		</div>
 	</section>

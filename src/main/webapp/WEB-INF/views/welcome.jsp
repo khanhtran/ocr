@@ -7,7 +7,7 @@
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 <title><spring:message code="welcome"/></title>
@@ -15,18 +15,18 @@
 <body>
 	<section>
 		<div class="jumbotron">
-			<div class="container">
+			<div class="container" id="header">
+				<h4 style="padding: 6px 12px;" class="pull-right"><a href="?language=en_US">English</a>|<a href="?language=es_ES">Spanish</a></h4>
 				<img src="<spring:url value='/resource/images/clinic.png' />" />
 				<h1><spring:message code="welcome"/></h1>
 				<p></p>
 			</div>
-
+			
 			<div class="container">
 				<security:authorize access="isAnonymous()">
 					<a href="<spring:url value='/login' />"
 						class="btn btn-default pull-right"><spring:message code="login"/></a>
-				</security:authorize>
-
+				</security:authorize>				
 				<p>
 					<security:authorize access="isAuthenticated()">
 						<spring:url value="/dologout" var="logout_url" />
