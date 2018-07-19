@@ -91,7 +91,7 @@
 						<div class="col-sm-4">&nbsp;</div>
 						<div class="col-sm-8">
 							<spring:message code="form.appointment.check.submit" var="checkSubmitText"/>
-                             <input type="submit" id="btnCheck" class="btn btn-primary" name="btnFinalSubmit" value="${checkSubmitText}"  class="form-control"/>
+                             <input <c:if test="${timespans.size() == 0}">disabled</c:if> type="submit" id="btnCheck" class="btn btn-primary" name="btnFinalSubmit" value="${checkSubmitText}"  class="form-control"/>
 						</div>
 					</div>
 				</div>

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.earthteam.ocr.viewmodels.AppointmentViewModel;
 import com.earthteam.ocr.domain.Appointment;
 import com.earthteam.ocr.domain.Category;
 import com.earthteam.ocr.domain.Doctor;
@@ -77,7 +75,8 @@ public class AppointmentController {
 	public String addAppointment(@RequestParam(value = "categoryId", required = false) Integer categoryId,
 			@RequestParam(value = "doctorId", required = false) Long doctorId,
 			@RequestParam(value = "timespanId", required = false) String strTimespanId,
-			@RequestParam(value = "date", required = false) String strDate, RedirectAttributes redirectAttributes,
+			@RequestParam(value = "date", required = false) String strDate,
+			@RequestParam(value = "btnFinalSubmit", required = false) String finalSubmit, RedirectAttributes redirectAttributes,
 			Model model) {
 		Calendar c = Calendar.getInstance();
 		List<String> dates = new ArrayList<String>();
@@ -115,8 +114,10 @@ public class AppointmentController {
 		model.addAttribute("doctorId", doctorId);
 //		timespans
 		Date date = null;
-		List<Timespan> timespans = doctor.getAvailableTimespans();
+		List<Timespan> timespans = null;
 		if (doctor != null) {
+			timespans = doctor.getAvailableTimespans();
+			
 			SimpleDateFormat format = new SimpleDateFormat(PATTERN);
 			try {
 				date = format.parse(strDate);
@@ -144,7 +145,7 @@ public class AppointmentController {
 //		timespanId
 		int timespanId = 0;
 		Timespan timespan = null;
-		if (strTimespanId != null && !strTimespanId.isEmpty()) {
+		if (timespans != null && strTimespanId != null && !strTimespanId.isEmpty()) {
 			timespanId = Integer.parseInt(strTimespanId);
 			for (int i = 0; i < timespans.size(); i++) {
 				if (timespans.get(i).getId() == timespanId) {
@@ -153,7 +154,7 @@ public class AppointmentController {
 				}
 			}
 		}
-		if (doctor != null && date != null && timespan != null) {
+		if (finalSubmit != null && doctor != null && date != null && timespan != null) {
 			Appointment appointment = new Appointment();
 			appointment.setDate(toSqlDate(date));
 			appointment.setDoctor(doctor);
@@ -185,17 +186,5 @@ public class AppointmentController {
 
 	private java.sql.Date toSqlDate(Date date) {
 		return new java.sql.Date(date.getTime());
-	}
-
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String checkAppointment(@ModelAttribute("newAppointment") AppointmentViewModel appointment, Model model) {
-
-		return "appointment/check-spans";
-	}
-
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String saveAppointment(@ModelAttribute("newAppointment") AppointmentViewModel appointment, Model model) {
-
-		return "appointment/save-appointment-result";
 	}
 }
