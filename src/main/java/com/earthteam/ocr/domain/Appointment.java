@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
@@ -18,20 +19,21 @@ public class Appointment {
 	@Id
 	@GeneratedValue
 	@Column(name = "APPOINTMENT_ID")
-	private int id;
+	private long id;
 	
-	@Valid
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "PATIENT_ID")
+//	@Valid
+//	@OneToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "PATIENT_ID")
+	@Transient
 	private Patient patient;
 	
 	@Valid
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "DOCTOR_ID")
 	private Doctor doctor;
 	
 	@Valid
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "TIMESPAN_ID")
 	private Timespan timeSpan;	
 	
@@ -42,11 +44,11 @@ public class Appointment {
 	@Column(name = "DATE")
 	private Date date;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
