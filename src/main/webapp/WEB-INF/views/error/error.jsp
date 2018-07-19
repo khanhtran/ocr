@@ -18,8 +18,8 @@
 
 <img src="<spring:url value='/resource/images/error_page.jpg'/>"/>
  
-<!--  --><H2>${requestScope['javax.servlet.error.message']}</H2>
  <h2>${errorMessage}</h2>
+ ${requestScope['javax.servlet.error.message']}
  <p>
  
  <a href="<spring:url value='/' />"

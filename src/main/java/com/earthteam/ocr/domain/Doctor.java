@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -57,7 +58,7 @@ public class Doctor {
 	private Category doctorCategory;
 	
 	@NotEmpty(message = "{timespan.empty}")
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Timespan> availableTimespans;
 	
 	

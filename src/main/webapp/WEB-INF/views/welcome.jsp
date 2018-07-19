@@ -25,8 +25,16 @@
 			<div class="container">
 				<security:authorize access="isAnonymous()">
 					<a href="<spring:url value='/login' />"
-						class="btn btn-default pull-right"><spring:message code="login"/></a>
-				</security:authorize>				
+						class="btn btn-default pull-right"> Login</a>
+				</security:authorize>
+				
+				<security:authorize access="isAnonymous()">
+					<!-- WHICH ONE? depends on basic form OR CUSTOM -->
+					<!--a href="<spring:url value='/spring_security_login' />" class="btn btn-default pull-right"> Login</a-->
+					<a href="<spring:url value='/patient/register' />"
+						class="btn btn-default pull-right"> Register Patient</a>
+				</security:authorize>
+
 				<p>
 					<security:authorize access="isAuthenticated()">
 						<spring:url value="/dologout" var="logout_url" />
@@ -40,9 +48,8 @@
 							</div>
 						</form:form>
 					</security:authorize>
-				</p>
-				<p>
-					<a href="<spring:url value='/' />"
+
+					<a href="<spring:url value='/appointment/add' />"
 						class="btn btn-default"> <span
 						class="glyphicon-hand-left glyphicon"></span><spring:message code='makeAppointment'/>
 					</a>

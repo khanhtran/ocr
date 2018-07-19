@@ -57,5 +57,15 @@ public class Timespan {
 		return getValue();
 	}
 	
+	@Transient
+	private boolean available = true;
+
+	public boolean isAvailable() {
+		return available;
+	}
+
+	public void setAvailable(boolean isAvailable) {
+		this.available = isAvailable;
+	}
 	
 }
