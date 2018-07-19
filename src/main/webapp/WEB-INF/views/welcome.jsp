@@ -28,6 +28,13 @@
 					<a href="<spring:url value='/login' />"
 						class="btn btn-default pull-right"> Login</a>
 				</security:authorize>
+				
+				<security:authorize access="isAnonymous()">
+					<!-- WHICH ONE? depends on basic form OR CUSTOM -->
+					<!--a href="<spring:url value='/spring_security_login' />" class="btn btn-default pull-right"> Login</a-->
+					<a href="<spring:url value='/patient/register' />"
+						class="btn btn-default pull-right"> Register Patient</a>
+				</security:authorize>
 
 				<p>
 					<security:authorize access="isAuthenticated()">

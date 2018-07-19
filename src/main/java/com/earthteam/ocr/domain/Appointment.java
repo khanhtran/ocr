@@ -1,8 +1,6 @@
 package com.earthteam.ocr.domain;
 
 import java.sql.Date;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +11,10 @@ import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
+import com.earthteam.ocr.domain.Doctor;
+import com.earthteam.ocr.domain.Timespan;
+import com.earthteam.ocr.domain.Patient;
+
 
 @Entity
 public class Appointment {
