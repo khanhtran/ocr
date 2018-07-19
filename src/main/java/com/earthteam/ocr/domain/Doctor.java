@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -57,15 +58,10 @@ public class Doctor {
 	private Category doctorCategory;
 	
 	@NotEmpty(message = "{timespan.empty}")
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Timespan> availableTimespans;
 	
-	private String fullName;
 	
-	public String getFullName() {
-		return firstName + " " + lastName;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -138,6 +134,10 @@ public class Doctor {
 		this.availableTimespans = availableTimespans;
 	}
 
+	public String getFullName() {
+		return firstName + " " + lastName;
+	}
+	
 	@Override
 	public String toString() {
 		return "Doctor [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", portfolio=" + portfolio

@@ -45,7 +45,7 @@
 
 
 
-					<a href="<spring:url value='/employees/list' />"
+					<a href="<spring:url value='/appointment/add' />"
 						class="btn btn-default"> <span
 						class="glyphicon-hand-left glyphicon"></span>Make a Medical
 						Appointment

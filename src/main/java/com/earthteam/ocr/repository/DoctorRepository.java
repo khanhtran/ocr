@@ -20,7 +20,7 @@ import com.earthteam.ocr.domain.Doctor;
 @Repository
 public interface DoctorRepository extends CrudRepository<Doctor, Long> {
 
-	@Query ("SELECT d FROM Doctor d WHERE firstName = :categoryId")
+	@Query ("SELECT d FROM Doctor d WHERE doctorCategory.id = :categoryId")
 	List<Doctor> findByCategoryId(@Param("categoryId") int categoryId);
 	
 }
