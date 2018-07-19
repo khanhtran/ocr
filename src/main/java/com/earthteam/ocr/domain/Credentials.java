@@ -1,4 +1,4 @@
-package com.earthteam.ocr.domain;
+package com.earthteam.ocr.domain; 
 
 import java.util.List;
 
@@ -11,17 +11,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity(name = "USERS")
 public class Credentials {
 
 	@Id
 	@Column(name = "USERNAME", nullable = false, unique = true)
-	String username;
+
+	@NotEmpty
+ 	String username;
 	
-	@Column(name = "PASSWORD", nullable = false)
+    @Column(name = "PASSWORD", nullable = false)
+    @NotEmpty
 	String password;
-	
+    @NotEmpty
+    @Transient
 	String verifyPassword;
 	
 	Boolean enabled;

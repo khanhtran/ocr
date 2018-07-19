@@ -1,7 +1,6 @@
 package com.earthteam.ocr.domain;
 
-import java.sql.Date;
-
+import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.Email;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,8 +21,9 @@ public class Patient {
 	@Id
 	@GeneratedValue
 	@Column(name = "PATIENT_ID")
-	private int id;
-	
+	private Long id;
+
+
 	@NotEmpty(message = "{String.empty}")
 	@Column(name = "FIRST_NAME")
 	private String firstName;
@@ -31,32 +32,44 @@ public class Patient {
 	@Column(name = "LAST_NAME")
 	private String lastName;
 	
-	@NotNull(message = "{String.empty}")
-	@Column(name = "DATE_OF_BIRTH")
-	@Past
-	@DateTimeFormat(pattern = "MM/dd/yyyy")
-	//@Temporal(TemporalType.DATE)
-	private Date dateOfBirth;
-	
-	@NotEmpty(message = "{String.empty}")
-	@Column(name = "SSN")
-	private String ssn;
+
+	@Valid
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "USERNAME")
+	private Credentials credentials;
+
 	
 	@Valid
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ADDRESS_ID")
 	private Address address;
-	
+
+
 	@Valid
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "username")
-	private Credentials credentials;
-
-	public int getId() {
+	@JoinColumn(name = "PHONE_ID")
+	private Phone phone;
+	
+	@Column(name = "DATE_OF_BIRTH")
+	@Past
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date dob;
+	
+	@NotEmpty
+	@Column(name = "SSN")
+	@Size(min=10 , max=10 , message= "{ssn.size}")
+	private String ssn;
+	
+	@NotEmpty
+	@Column(name = "EMAIL_ADDRESS")
+	@Email
+	private String emailAddress;
+	
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -76,12 +89,28 @@ public class Patient {
 		this.lastName = lastName;
 	}
 
-	public Date getDateOfBirth() {
-		return dateOfBirth;
+	public Address getAddress() {
+		return address;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public Phone getPhone() {
+		return phone;
+	}
+
+	public void setPhone(Phone phone) {
+		this.phone = phone;
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
 	}
 
 	public String getSsn() {
@@ -92,12 +121,14 @@ public class Patient {
 		this.ssn = ssn;
 	}
 
-	public Address getAddress() {
-		return address;
+
+	public String getEmailAddress() {
+		return emailAddress;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+
 	}
 
 	public Credentials getCredentials() {
@@ -106,5 +137,13 @@ public class Patient {
 
 	public void setCredentials(Credentials credentials) {
 		this.credentials = credentials;
-	}	
+
+	}
+
+	@Override
+	public String toString() {
+		return "Patient [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", credentials="
+				+ credentials + ", address=" + address + ", phone=" + phone + ", dob=" + dob + ", ssn=" + ssn
+				+ ", emailAddress=" + emailAddress + "]";
+	}
 }
