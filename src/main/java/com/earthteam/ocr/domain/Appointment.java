@@ -23,10 +23,9 @@ public class Appointment {
 	@Column(name = "APPOINTMENT_ID")
 	private long id;
 	
-//	@Valid
-//	@OneToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "PATIENT_ID")
-	@Transient
+	@Valid
+	@OneToOne
+	@JoinColumn(name = "PATIENT_ID")
 	private Patient patient;
 	
 	@Valid
