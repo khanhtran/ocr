@@ -3,6 +3,7 @@ package com.earthteam.ocr.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,6 +40,9 @@ import com.earthteam.ocr.service.TimespanService;
 @Controller
 @RequestMapping("/appointment")
 public class AppointmentController {
+	
+	private static final String PATTERN = "MM/dd/yyyy";
+	
 	@Autowired
 	private AppointmentService appointmentService;
 
@@ -64,10 +68,10 @@ public class AppointmentController {
 //		return doctorService.findAll();
 //	}
 
-	@ModelAttribute("timespans")
-	public List<Timespan> getTimespans() {
-		return timespanService.findAll();
-	}
+//	@ModelAttribute("timespans")
+//	public List<Timespan> getTimespans() {
+//		return timespanService.findAll();
+//	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addAppointment(@RequestParam(value = "categoryId", required = false) Integer categoryId,
@@ -75,9 +79,21 @@ public class AppointmentController {
 			@RequestParam(value = "timespanId", required = false) String strTimespanId,
 			@RequestParam(value = "date", required = false) String strDate, RedirectAttributes redirectAttributes,
 			Model model) {
+		Calendar c = Calendar.getInstance();
+		List<String> dates = new ArrayList<String>();
+		for (int i = 0; i < 14; i++) {
+			c.add(Calendar.DATE, 1);
+			dates.add(formatDate(c.getTime()));
+		}
+		if (strDate == null) {
+			strDate = dates.get(0);
+		}
+		model.addAttribute("dates", dates);
 //		categoryId
 		model.addAttribute("categoryId", categoryId);
 		model.addAttribute("date", strDate);
+		
+		
 //		doctors
 		List<Doctor> doctors;
 		if (categoryId != null && categoryId > 0) {
@@ -89,39 +105,42 @@ public class AppointmentController {
 
 		Doctor doctor = null;
 		if (doctorId != null && doctorId > 0) {
-			List<Doctor> tmp = doctors.stream().filter((Doctor d) -> d.getId() == doctorId)
-					.collect(Collectors.toList());
-			if (tmp.size() > 0) {
-				doctor = tmp.get(0);
-				model.addAttribute("doctor", doctor);
+			doctor = doctorService.findById(doctorId);
+		} else {
+			if (doctors.size() > 0) {
+				doctor = doctors.get(0);
 			}
 		}
 //		doctorId
 		model.addAttribute("doctorId", doctorId);
 //		timespans
 		Date date = null;
-		List<Timespan> timespans = null;
-		if (doctor != null && strDate != null) {
-			SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+		List<Timespan> timespans = doctor.getAvailableTimespans();
+		if (doctor != null) {
+			SimpleDateFormat format = new SimpleDateFormat(PATTERN);
 			try {
 				date = format.parse(strDate);
 				timespans = doctor.getAvailableTimespans();
-				List<Appointment> appointments = appointmentService.findByDoctorIdAndDate(doctor.getId(),
-						toSqlDate(date));
+				List<Appointment> appointments = appointmentService.findByDoctorId(doctor.getId());
 				List<Integer> occupiedTimespanIds = new ArrayList<>();
-				appointments.forEach((Appointment a) -> occupiedTimespanIds.add(a.getTimeSpan().getId()));
-
+				for (int i = 0; i < appointments.size(); i++) {
+					Date tmp = appointments.get(i).getDate();
+					if (date.getYear() == tmp.getYear() && date.getMonth() == tmp.getMonth() && date.getDate() == tmp.getDate()) {
+						occupiedTimespanIds.add(appointments.get(i).getTimeSpan().getId());
+					}
+				}
+//				System.out.println("occupiedTimespanIds" + occupiedTimespanIds);
 				for (int i = 0; i < timespans.size(); i++) {
 					Timespan t = timespans.get(i);
 					if (occupiedTimespanIds.contains(t.getId())) {
 						t.setAvailable(false);
 					}
 				}
-				model.addAttribute("timespans", timespans);
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 		}
+		model.addAttribute("timespans", timespans);
 //		timespanId
 		int timespanId = 0;
 		Timespan timespan = null;
@@ -146,6 +165,11 @@ public class AppointmentController {
 		} else {
 			return "appointment/make-appointment";
 		}
+	}
+
+	private String formatDate(Date date) {
+		SimpleDateFormat format = new SimpleDateFormat(PATTERN);
+		return format.format(date);
 	}
 
 	@RequestMapping(value = "/appointment-result")

@@ -3,6 +3,7 @@ package com.earthteam.ocr.serviceimpl;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -35,7 +36,8 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 	@Override
 	public List<Appointment> findByDoctorId(long doctorId) {
-		return appointmentRepository.findByDoctorId(doctorId);
+		List<Appointment> all = findAll();
+		return all.stream().filter((Appointment a) -> a.getDoctor().getId() == doctorId).collect(Collectors.toList());
 	}
 
 	@Override

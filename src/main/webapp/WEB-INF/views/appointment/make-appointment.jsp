@@ -28,6 +28,18 @@
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label class="control-label col-sm-4" for="category"><spring:message
+								code="form.appointment.date" /></label>
+						<div class="col-sm-8">
+							<select name="date" class="form-control" onchange="javascript: $('#appointmentForm').submit()">
+								<c:forEach items="${dates}" var="d">
+									<option value="${d}" <c:if test="${d == date}">selected</c:if> >${d}</option>
+								</c:forEach>
+							</select> 
+							
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="category"><spring:message
 								code="form.appointment.doctorCategory" /></label>
 						<div class="col-sm-8">
 							<select name="categoryId" class="form-control" onchange="javascript: $('#appointmentForm').submit()">
@@ -55,13 +67,13 @@
 						</div>
 					</div>
 
-					<div class="form-group">
+					<%-- <div class="form-group">
 						<label for="date" class="col-sm-4 control-label"><spring:message
 								code="form.appointment.date" /></label>
 						<div class="col-sm-8">
 							<input id="date" name="date" value="${date}" class="form-control" />
 						</div>
-					</div>
+					</div> --%>
 					<!-- timespans -->
 					<div class="form-group">
 						<label for="date" class="col-sm-4 control-label"><spring:message
@@ -69,7 +81,7 @@
 						<div class="col-sm-8">
 							<c:forEach items="${timespans}" var="timespan">
 								<div class="radio">
-							    	<label><input <c:if test="{timespan.available == false}">disabled</c:if> type="radio" name="timespanId" value="${timespan.id}" class="form-check-input"/> ${timespan.value}</label>
+							    	<label><input <c:if test="${!timespan.available}">disabled</c:if> type="radio" name="timespanId" value="${timespan.id}" class="form-check-input"/> ${timespan.value}</label>
 							     </div>
 							</c:forEach>
 						</div>

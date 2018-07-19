@@ -8,4 +8,5 @@ public interface DoctorService {
 	long save(Doctor doctor);
 	List<Doctor> findAll();
 	List<Doctor> findByCategory(int categoryId);
+	Doctor findById(long id);
 }

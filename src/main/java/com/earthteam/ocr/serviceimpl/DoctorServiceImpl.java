@@ -41,4 +41,9 @@ public class DoctorServiceImpl implements DoctorService {
 		return doctorRepository.findByCategoryId(categoryId);
 	}
 
+	@Override
+	public Doctor findById(long id) {
+		return doctorRepository.findOne(id);
+	}
+
 }
