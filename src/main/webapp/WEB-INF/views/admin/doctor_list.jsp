@@ -9,7 +9,6 @@
 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
 <link rel="stylesheet" 
 	href="<spring:url value='/resource/css/style.css'/>"/>
-
 </head>
 <body>
 	<section>

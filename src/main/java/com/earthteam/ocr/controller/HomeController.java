@@ -31,6 +31,6 @@ public class HomeController {
 	
 	@RequestMapping("/test")
 	public String test() throws Exception {
-		throw new Exception("test");
+		return "home";
 	}
 }
