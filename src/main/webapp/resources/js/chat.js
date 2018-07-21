@@ -24,8 +24,7 @@ function renderMessage(frame) {
 	  }
 	  if (receiver == 'Support') {
 		  $('#chatBtn').addClass('blink');
-	  } else {
-		  $('#chatBtn').removeClass('blink');
+		  console.log(frame.body);
 	  }
   } catch (e) {
 	  console.log(e);

@@ -37,7 +37,7 @@
 				</a>
 				
 				<a id="chatBtn" href="javascript:openCustomerChat();"
-						class="btn btn-default blink"><spring:message code='chatWithClient'/></a>
+						class="btn btn-default"><spring:message code='chatWithClient'/></a>
 						
 				<security:authorize access="isAuthenticated()">
 					<spring:url value="/dologout" var="logout_url" />
