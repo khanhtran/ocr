@@ -11,4 +11,5 @@ public interface PatientService {
 	List<Patient> findAll();
 	Patient findPatientById(Long patientId);
 	Patient getPatientByUserName(String username);
+	public Patient getPatienByEmail(String email);
 }

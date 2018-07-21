@@ -32,6 +32,8 @@
 				<prop key="hibernate.hbm2ddl.import_files">populate.sql</prop>
 			</props>
 		</property>
+
+
 	</bean>
 
 	<bean id="dataSource"

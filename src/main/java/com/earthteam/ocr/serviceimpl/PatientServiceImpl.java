@@ -52,5 +52,10 @@ public class PatientServiceImpl implements PatientService {
 		
 		return patientRepository.getPatientByUsername(username);
 	}
+	@Override
+	public Patient getPatienByEmail(String email) {
+		
+		return patientRepository.findByEmailId(email);
+	}
 
 }

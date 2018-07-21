@@ -132,9 +132,10 @@
 							<label class="control-label col-sm-4" for="ssn"><spring:message code="form.verifyPassword"/></label>
 							<div class="col-sm-8">
 								<form:input id="verifyPassword" type="password" path="credentials.verifyPassword" class="form-control"/>
-								<form:errors path="credentials.verifyPassword" cssClass="text-danger"/>
+								<form:errors path="credentials" cssClass="text-danger"/>
 							</div>
 						</div>
+						
 						
             			<!-- submit -->
             			<div class="form-group">
