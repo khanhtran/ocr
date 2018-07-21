@@ -26,10 +26,16 @@ public class PatientServiceImpl implements PatientService {
 
 	@Autowired
 	PatientRepository patientRepository;
+	
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
 
 	@Override
 	public long save(Patient patient) {
 
+		String encodedPassword = passwordEncoder.encode(patient.getCredentials().getPassword());
+		patient.getCredentials().setPassword(encodedPassword);
+		patient.getCredentials().setVerifyPassword(encodedPassword);
 		return patientRepository.save(patient).getId();
 		
 	}

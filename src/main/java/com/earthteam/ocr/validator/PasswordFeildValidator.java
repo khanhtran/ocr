@@ -29,7 +29,7 @@ public class PasswordFeildValidator implements ConstraintValidator<PasswordFeild
 	      	  Matcher matcher;
 	       
 	      	  final String PASSWORD_PATTERN = 
-	                    "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{4,20})";
+	                    "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{4,100})";
 	      	  pattern = pattern.compile(PASSWORD_PATTERN);
 	      	  matcher = pattern.matcher(password);
 			  return matcher.matches();

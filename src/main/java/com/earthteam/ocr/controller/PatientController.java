@@ -59,9 +59,7 @@ public class PatientController {
 
 		Authority authority = new Authority();
 
-		String encodedPassword = passwordEncoder.encode(patient.getCredentials().getPassword());
-		//patient.getCredentials().setPassword(encodedPassword);
-		//patient.getCredentials().setVerifyPassword(encodedPassword);
+		
 
 		patient.getCredentials().setEnabled(true);
 
