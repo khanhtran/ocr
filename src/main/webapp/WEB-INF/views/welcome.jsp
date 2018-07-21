@@ -21,44 +21,39 @@
 <body>
 	<section>
 		<div class="jumbotron">
-			<div class="container" id="header">
+			<div class="container">
 				<h1 class="col-sm-10"><spring:message code="welcome"/></h1>
 				<h4 class="col-sm-2"><a href="?language=en_US">English</a>|<a href="?language=es_ES">Spanish</a></h4>
 			</div>
 			
 			<div class="container">
 				<!-- chat is common for all -->
+				<security:authorize access="isAnonymous()">
+					<a href="<spring:url value='/patient/register' />"
+						class="btn btn-default"><spring:message code='form.addPatient'/></a>
+				</security:authorize>
+				<a href="<spring:url value='/appointment/add' />"
+					class="btn btn-default"> <span
+					class="glyphicon-hand-left glyphicon"></span><spring:message code='makeAppointment'/>
+				</a>
 				<a href="javascript:openCustomerChat();"
-						class="btn btn-default pull-right"><spring:message code='chat'/></a>
+						class="btn btn-default"><spring:message code='chat'/></a>
 				<security:authorize access="isAnonymous()">
 					<a href="<spring:url value='/login' />"
-						class="btn btn-default pull-right"><spring:message code='login'/></a>
+						class="btn btn-default"><spring:message code='login'/></a>
 				</security:authorize>
-				
-				<security:authorize access="isAnonymous()">
-					<!-- WHICH ONE? depends on basic form OR CUSTOM -->
-					<!--a href="<spring:url value='/spring_security_login' />" class="btn btn-default pull-right"> Login</a-->
-					<a href="<spring:url value='/patient/register' />"
-						class="btn btn-default pull-right"><spring:message code='form.addPatient'/></a>
-				</security:authorize>
-
-					<security:authorize access="isAuthenticated()">
-						<spring:url value="/dologout" var="logout_url" />
-						<form:form action="${logout_url}" class="form-horizontal"
-							method="POST">
-							<div class="form-group">
-								<div class="col-lg-offset-2 col-lg-10">
-									<input type="submit" id="btnAdd" 
-										class="btn btn-danger btn-mini  pull-right" value="<spring:message code='logout'/>" />
-								</div>
-							</div>
-						</form:form>
-					</security:authorize>
-
-					<a href="<spring:url value='/appointment/add' />"
-						class="btn btn-default"> <span
-						class="glyphicon-hand-left glyphicon"></span><spring:message code='makeAppointment'/>
+				<security:authorize access="isAuthenticated()">
+					<spring:url value="/dologout" var="logout_url" />
+					<a href="javascript: $('#logoutForm').submit();"
+					class="btn btn-default"> <span
+					class="glyphicon-hand-right glyphicon"></span>Logout
 					</a>
+					<form:form action="${logout_url}" class="form-horizontal"
+						method="POST" id="logoutForm">
+					</form:form>
+				</security:authorize>
+
+				
 			</div>
 		</div>
 	</section>

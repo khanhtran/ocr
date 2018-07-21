@@ -1,7 +1,5 @@
 package com.earthteam.ocr.scheduler;
 
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,12 @@ import org.springframework.stereotype.Component;
 import com.earthteam.ocr.domain.ChatMessage;
 import com.earthteam.ocr.service.ChatService;
 
+/**
+ * 
+ * @author Cong Khanh Tran - trancongkhanh@gmail.com
+ *
+ *
+ */
 @Component
 public class ChatScheduler {
 

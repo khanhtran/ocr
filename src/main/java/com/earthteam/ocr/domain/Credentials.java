@@ -1,4 +1,4 @@
-package com.earthteam.ocr.domain; 
+package com.earthteam.ocr.domain;
 
 import java.util.List;
 
@@ -15,22 +15,28 @@ import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.earthteam.ocr.validator.PasswordFeildConstraint;
+import com.earthteam.ocr.validator.PasswordsEqualConstraint;
+
 @Entity(name = "USERS")
+@PasswordsEqualConstraint
 public class Credentials {
 
 	@Id
 	@Column(name = "USERNAME", nullable = false, unique = true)
 
 	@NotEmpty
- 	String username;
-	
-    @Column(name = "PASSWORD", nullable = false)
-    @NotEmpty
+	String username;
+
+	@Column(name = "PASSWORD", nullable = false)
+	@NotEmpty
+	@PasswordFeildConstraint
 	String password;
-    @NotEmpty
-    @Transient
-	String verifyPassword;
 	
+	@NotEmpty
+	@Transient
+	String verifyPassword;
+
 	Boolean enabled;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

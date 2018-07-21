@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.earthteam.ocr.domain.Authority;
 import com.earthteam.ocr.domain.Patient;
 import com.earthteam.ocr.service.PatientService;
+import com.earthteam.ocr.validator.PasswordEqualValidator;
 
 /**
  * @author Vivian Samson
@@ -34,9 +35,11 @@ public class PatientController {
 
 	@Autowired
 	PatientService patientService;
-	
+
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
+	
+	
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String registerPatient(@ModelAttribute("patient") Patient patient, Model model) {
@@ -55,19 +58,18 @@ public class PatientController {
 		}
 
 		Authority authority = new Authority();
+
 		
-		String encodedPassword = passwordEncoder.encode(patient.getCredentials().getPassword());
-		patient.getCredentials().setPassword(encodedPassword);
-		
+
 		patient.getCredentials().setEnabled(true);
-		
+
 		authority.setUsername(patient.getCredentials().getUsername());
 		authority.setAuthority("ROLE_USER");
 
 		List<Authority> list = new ArrayList<>();
 		list.add(authority);
 		patient.getCredentials().setAuthority(list);
-		
+
 		long patientId = patientService.save(patient);
 		System.out.println("Saved Patient with id: " + patientId + " and userName is: "
 				+ patient.getCredentials().getUsername() + "and password is:" + patient.getCredentials().getPassword());

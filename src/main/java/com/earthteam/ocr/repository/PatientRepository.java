@@ -15,4 +15,7 @@ public interface PatientRepository extends CrudRepository<Patient, Long>{
 	
 	@Query("SELECT p FROM Patient p WHERE p.credentials.username = :username")
 	Patient getPatientByUsername(@Param("username") String username);
+	
+	@Query ("SELECT p FROM Patient p WHERE p.emailAddress = :email")
+	Patient findByEmailId(@Param("email") String email);	
 }
